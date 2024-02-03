@@ -23,3 +23,26 @@ exports.updatePost = async (postId, userId, { title, body, active, geoLocation }
 exports.deletePost = async (postId, userId) => {
   return await Post.findOneAndDelete({ _id: postId, createdBy: userId });
 };
+
+exports.getPostsByLocation = async ({ latitude, longitude }) => {
+  
+    const radiusInKilometers = 10; // Example: Search within 10 kilometers
+  
+    try {
+      const posts = await Post.find({
+        geoLocation: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates: [longitude, latitude],
+            },
+            $maxDistance: radiusInKilometers * 1000, // Convert to meters
+          },
+        },
+      });
+
+      return posts;
+    } catch (error) {
+      throw error;
+    }
+  };

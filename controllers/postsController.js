@@ -69,3 +69,13 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete post' });
   }
 };
+
+exports.getPostsByLocation = async (req, res) => {
+    try {
+      const { latitude, longitude } = req.query;
+      const posts = await postsService.getPostsByLocation({ latitude, longitude });
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to retrieve posts by location' });
+    }
+};

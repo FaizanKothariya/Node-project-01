@@ -10,4 +10,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), postsContro
 router.put('/:id', passport.authenticate('jwt', { session: false }), postsController.updatePost);
 router.delete('/:id', passport.authenticate('jwt', { session: false }), postsController.deletePost);
 
+// New endpoint to get posts by location
+router.get('/byLocation', passport.authenticate('jwt', { session: false }), postsController.getPostsByLocation);
+
 module.exports = router;
