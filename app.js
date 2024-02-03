@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -18,7 +19,15 @@ async function connectToDatabase() {
     }
   }
   
-  connectToDatabase();
+connectToDatabase();
+
+// Configure Passport
+require('./passport');
+
+app.use(express.json());
+
+// Register auth routes
+app.use('/auth', authRoutes);
 
 // Define a simple route
 app.get('/', (req, res) => {
