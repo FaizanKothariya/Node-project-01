@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
+const postsRoutes = require('./routes/postsRoutes');
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -26,8 +27,9 @@ require('./passport');
 
 app.use(express.json());
 
-// Register auth routes
+// Register auth routes and Posts routes
 app.use('/auth', authRoutes);
+app.use('/posts', postsRoutes);
 
 // Define a simple route
 app.get('/', (req, res) => {
