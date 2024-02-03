@@ -13,4 +13,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), postsCon
 // New endpoint to get posts by location
 router.get('/byLocation', passport.authenticate('jwt', { session: false }), postsController.getPostsByLocation);
 
+// New endpoint to get posts Active and Inactive
+router.get('/counts', passport.authenticate('jwt', { session: false }), postsController.getPostCounts);
+
 module.exports = router;

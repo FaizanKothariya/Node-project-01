@@ -6,19 +6,10 @@ const postSchema = new mongoose.Schema({
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   active: { type: Boolean, default: true },
   geoLocation: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
+    latitude: { type: Number, required: true },
+    longitude: { type: Number, required: true },
   },
 }, { timestamps: true });
-
-postSchema.index({ geoLocation: '2dsphere' });
 
 const Post = mongoose.model('Post', postSchema);
 

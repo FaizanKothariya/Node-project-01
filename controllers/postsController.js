@@ -79,3 +79,13 @@ exports.getPostsByLocation = async (req, res) => {
       res.status(500).json({ error: 'Failed to retrieve posts by location' });
     }
 };
+
+exports.getPostCounts = async (req, res) => {
+    try {
+      const postCounts = await postsService.getPostCounts();
+      res.json(postCounts);
+    } catch (error) {
+      console.error('Error in getPostCounts:', error);
+      res.status(500).json({ error: 'Failed to retrieve post counts' });
+    }
+};

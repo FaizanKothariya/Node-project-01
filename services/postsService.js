@@ -46,3 +46,15 @@ exports.getPostsByLocation = async ({ latitude, longitude }) => {
       throw error;
     }
   };
+
+  exports.getPostCounts = async () => {
+    try {
+      const activeCount = await Post.countDocuments({ active: true });
+      const inactiveCount = await Post.countDocuments({ active: false });
+  
+      return { active: activeCount, inactive: inactiveCount };
+    } catch (error) {
+      console.error('Error in getPostCounts:', error);
+      throw error;
+    }
+  };
